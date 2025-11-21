@@ -4,38 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Meta Dev App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Base Styles */
         :root {
-            --primary-color: #1877f2;
-            --secondary-color: #42b72a;
-            --dark-color: #1c1e21;
-            --light-color: #f0f2f5;
-            --text-color: #333;
-            --border-color: #dddfe2;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --primary: #1877f2;
+            --primary-dark: #0e5cb9;
+            --secondary: #42b72a;
+            --dark: #1c1e21;
+            --light: #f0f2f5;
+            --gray: #65676b;
+            --white: #ffffff;
+            --border: #dddfe2;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--light-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Header Styles */
         header {
-            background-color: white;
+            background-color: var(--white);
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
@@ -52,38 +96,48 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: bold;
+            gap: 12px;
+            font-weight: 700;
             font-size: 1.5rem;
-            color: var(--primary-color);
+            color: var(--primary);
         }
 
         .logo-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--primary-color);
-            border-radius: 8px;
+            background-color: var(--primary);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--white);
         }
 
-        nav ul {
+        .desktop-nav ul {
             display: flex;
-            list-style: none;
             gap: 25px;
         }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
+        .desktop-nav a {
             font-weight: 500;
-            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
         }
 
-        nav a:hover {
-            color: var(--primary-color);
+        .desktop-nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .desktop-nav a:hover:after,
+        .desktop-nav a.active:after {
+            width: 100%;
         }
 
         .mobile-menu-btn {
@@ -92,11 +146,13 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--dark);
         }
 
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color), #0d5bb5);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), #0d5bb5);
+            color: var(--white);
             padding: 60px 0;
             text-align: center;
         }
@@ -109,70 +165,108 @@
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0 auto 25px;
         }
 
-        .policy-content {
-            background-color: white;
-            border-radius: 10px;
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .last-updated {
+            background-color: var(--white);
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 40px;
-            margin: 40px 0;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .last-updated span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .policy-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
         }
 
         .policy-nav {
-            position: sticky;
-            top: 80px;
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
+            background-color: var(--white);
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
-            margin-bottom: 30px;
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
         }
 
         .policy-nav h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
+            margin-bottom: 20px;
+            color: var(--primary);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
         }
 
         .policy-nav ul {
-            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .policy-nav li {
-            margin-bottom: 10px;
+        .policy-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            transition: var(--transition);
         }
 
-        .policy-nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            transition: color 0.3s;
-            display: block;
-            padding: 5px 0;
+        .policy-nav li a:hover,
+        .policy-nav li a.active {
+            background-color: var(--light);
+            color: var(--primary);
         }
 
-        .policy-nav a:hover {
-            color: var(--primary-color);
+        .policy-nav li a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .policy-content {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
         }
 
         .policy-section {
             margin-bottom: 40px;
+            scroll-margin-top: 20px;
         }
 
         .policy-section h2 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
         }
 
         .policy-section h3 {
             margin: 20px 0 10px;
-            color: var(--dark-color);
+            color: var(--dark);
         }
 
         .policy-section p {
             margin-bottom: 15px;
+            color: var(--gray);
         }
 
         .policy-section ul {
@@ -182,97 +276,76 @@
 
         .policy-section li {
             margin-bottom: 8px;
+            color: var(--gray);
+            list-style-type: disc;
         }
 
         .highlight-box {
-            background-color: var(--light-color);
-            border-left: 4px solid var(--primary-color);
-            padding: 15px 20px;
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
             margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .last-updated {
-            background-color: var(--light-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .last-updated span {
-            font-weight: bold;
+            border-radius: 0 var(--radius) var(--radius) 0;
         }
 
         .contact-info {
-            background-color: var(--light-color);
+            background-color: var(--light);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: var(--radius);
             margin-top: 30px;
         }
 
         .contact-info h3 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 15px;
         }
 
+        /* Footer */
         footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 40px 0;
-            margin-top: 40px;
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 50px 0 20px;
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-section h3 {
             margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .footer-links {
-            list-style: none;
+            color: var(--primary);
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
+            color: #b0b3b8;
+            transition: var(--transition);
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--white);
         }
 
         .copyright {
             text-align: center;
-            margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #444;
+            border-top: 1px solid #3a3b3c;
+            color: #b0b3b8;
         }
 
+        /* Back to Top Button */
         .back-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: white;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: var(--white);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -282,252 +355,388 @@
             text-decoration: none;
             box-shadow: var(--shadow);
             opacity: 0;
-            transition: opacity 0.3s;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
         }
 
         .back-to-top.visible {
             opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 200;
+            padding: 30px;
+            transform: translateX(-100%);
+            transition: var(--transition);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .policy-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .policy-nav {
+                position: static;
+                margin-bottom: 20px;
+            }
+            
+            .policy-content {
+                padding: 30px;
+            }
         }
 
         @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
             .mobile-menu-btn {
                 display: block;
             }
-
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background-color: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: var(--shadow);
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
+            
             .hero h1 {
                 font-size: 2rem;
             }
-
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .last-updated {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
             .policy-content {
                 padding: 20px;
             }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
 
-            .last-updated {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
+        @media (max-width: 576px) {
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                padding: 30px 0;
+            }
+            
+            .policy-nav {
+                padding: 20px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">M</div>
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
                     <span>Meta Dev App</span>
-                </div>
-                <button class="mobile-menu-btn">☰</button>
-                <nav>
+                </a>
+                
+                <nav class="desktop-nav">
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Features</a></li>
                         <li><a href="#">Documentation</a></li>
                         <li><a href="#">Support</a></li>
-                        <li><a href="#" style="color: var(--primary-color);">Privacy Policy</a></li>
+                        <li><a href="#" class="active">Privacy Policy</a></li>
                     </ul>
                 </nav>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <span>Meta Dev App</span>
+            </div>
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#" class="active">Privacy Policy</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Privacy Policy</h1>
             <p>Your privacy is important to us. This policy explains how Meta Dev App collects, uses, and protects your information.</p>
+            <a href="#policy-content" class="btn btn-outline">Read Policy</a>
         </div>
     </section>
 
-    <div class="container">
-        <div class="last-updated">
-            <div>This policy was last updated on: <span id="last-updated-date">October 15, 2023</span></div>
-            <button id="print-btn" class="btn">Print Policy</button>
-        </div>
-
-        <div class="policy-content">
-            <div class="policy-nav">
-                <h3>Policy Contents</h3>
-                <ul>
-                    <li><a href="#information-we-collect">Information We Collect</a></li>
-                    <li><a href="#how-we-use-info">How We Use Your Information</a></li>
-                    <li><a href="#data-sharing">Data Sharing and Disclosure</a></li>
-                    <li><a href="#data-security">Data Security</a></li>
-                    <li><a href="#your-rights">Your Rights and Choices</a></li>
-                    <li><a href="#cookies">Cookies and Tracking</a></li>
-                    <li><a href="#international">International Data Transfers</a></li>
-                    <li><a href="#children">Children's Privacy</a></li>
-                    <li><a href="#changes">Changes to This Policy</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="last-updated">
+                <div>This policy was last updated on: <span id="lastUpdatedDate">October 15, 2023</span></div>
+                <div>
+                    <button id="printBtn" class="btn"><i class="fas fa-print"></i> Print Policy</button>
+                </div>
             </div>
 
-            <div class="policy-sections">
-                <section id="information-we-collect" class="policy-section">
-                    <h2>Information We Collect</h2>
-                    <p>We collect information to provide better services to our users. The types of information we collect depend on how you use our app.</p>
-                    
-                    <h3>Information You Provide</h3>
+            <div class="policy-container">
+                <!-- Policy Navigation -->
+                <aside class="policy-nav">
+                    <h3>Policy Contents</h3>
                     <ul>
-                        <li><strong>Account Information:</strong> When you create an account, we collect your name, email address, and other profile information.</li>
-                        <li><strong>Content:</strong> We collect the content you create, upload, or receive from others when using our services.</li>
-                        <li><strong>Payment Information:</strong> If you make purchases, we collect payment information, but we don't store full credit card details.</li>
+                        <li><a href="#information-collected" class="active"><i class="fas fa-database"></i> Information Collected</a></li>
+                        <li><a href="#information-use"><i class="fas fa-cogs"></i> How We Use Information</a></li>
+                        <li><a href="#data-sharing"><i class="fas fa-share-alt"></i> Data Sharing</a></li>
+                        <li><a href="#data-security"><i class="fas fa-shield-alt"></i> Data Security</a></li>
+                        <li><a href="#your-rights"><i class="fas fa-user-check"></i> Your Rights</a></li>
+                        <li><a href="#cookies"><i class="fas fa-cookie-bite"></i> Cookies</a></li>
+                        <li><a href="#international"><i class="fas fa-globe"></i> International Transfers</a></li>
+                        <li><a href="#children"><i class="fas fa-child"></i> Children's Privacy</a></li>
+                        <li><a href="#policy-changes"><i class="fas fa-sync-alt"></i> Policy Changes</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
                     </ul>
-                    
-                    <h3>Information Collected Automatically</h3>
-                    <ul>
-                        <li><strong>Usage Information:</strong> We collect information about how you use our app, including features you use and time spent.</li>
-                        <li><strong>Device Information:</strong> We collect device-specific information like hardware model, operating system, and unique device identifiers.</li>
-                        <li><strong>Log Information:</strong> When you use our services, we automatically collect and store certain information in server logs.</li>
-                    </ul>
-                    
-                    <div class="highlight-box">
-                        <p><strong>Note:</strong> We do not sell your personal information to third parties.</p>
-                    </div>
-                </section>
+                </aside>
 
-                <section id="how-we-use-info" class="policy-section">
-                    <h2>How We Use Your Information</h2>
-                    <p>We use the information we collect to provide, maintain, and improve our services, develop new ones, and protect Meta Dev App and our users.</p>
-                    
-                    <h3>Specific Uses Include:</h3>
-                    <ul>
-                        <li>Providing and personalizing our services</li>
-                        <li>Developing new features and services</li>
-                        <li>Measuring performance and analyzing usage</li>
-                        <li>Communicating with you about our services</li>
-                        <li>Protecting against fraud and abuse</li>
-                        <li>Legal compliance</li>
-                    </ul>
-                </section>
+                <!-- Policy Content -->
+                <div class="policy-content" id="policy-content">
+                    <section id="information-collected" class="policy-section">
+                        <h2>Information We Collect</h2>
+                        <p>We collect information to provide better services to our users. The types of information we collect depend on how you use our app.</p>
+                        
+                        <h3>Information You Provide</h3>
+                        <ul>
+                            <li><strong>Account Information:</strong> When you create an account, we collect your name, email address, and other profile information.</li>
+                            <li><strong>Content:</strong> We collect the content you create, upload, or receive from others when using our services.</li>
+                            <li><strong>Payment Information:</strong> If you make purchases, we collect payment information, but we don't store full credit card details.</li>
+                        </ul>
+                        
+                        <h3>Information Collected Automatically</h3>
+                        <ul>
+                            <li><strong>Usage Information:</strong> We collect information about how you use our app, including features you use and time spent.</li>
+                            <li><strong>Device Information:</strong> We collect device-specific information like hardware model, operating system, and unique device identifiers.</li>
+                            <li><strong>Log Information:</strong> When you use our services, we automatically collect and store certain information in server logs.</li>
+                        </ul>
+                        
+                        <div class="highlight-box">
+                            <p><strong>Note:</strong> We do not sell your personal information to third parties.</p>
+                        </div>
+                    </section>
 
-                <section id="data-sharing" class="policy-section">
-                    <h2>Data Sharing and Disclosure</h2>
-                    <p>We do not share personal information with companies, organizations, or individuals outside of Meta except in the following cases:</p>
-                    
-                    <h3>With Your Consent</h3>
-                    <p>We will share personal information with third parties when we have your consent to do so.</p>
-                    
-                    <h3>For Legal Reasons</h3>
-                    <p>We will share personal information if we believe that access, use, preservation, or disclosure of the information is reasonably necessary to:</p>
-                    <ul>
-                        <li>Meet any applicable law, regulation, legal process, or enforceable governmental request</li>
-                        <li>Enforce applicable Terms of Service, including investigation of potential violations</li>
-                        <li>Detect, prevent, or otherwise address fraud, security, or technical issues</li>
-                        <li>Protect against harm to the rights, property or safety of our users, the public, or Meta</li>
-                    </ul>
-                </section>
+                    <section id="information-use" class="policy-section">
+                        <h2>How We Use Your Information</h2>
+                        <p>We use the information we collect to provide, maintain, and improve our services, develop new ones, and protect Meta Dev App and our users.</p>
+                        
+                        <h3>Specific Uses Include:</h3>
+                        <ul>
+                            <li>Providing and personalizing our services</li>
+                            <li>Developing new features and services</li>
+                            <li>Measuring performance and analyzing usage</li>
+                            <li>Communicating with you about our services</li>
+                            <li>Protecting against fraud and abuse</li>
+                            <li>Legal compliance</li>
+                        </ul>
+                    </section>
 
-                <section id="data-security" class="policy-section">
-                    <h2>Data Security</h2>
-                    <p>We work hard to protect our users from unauthorized access to or unauthorized alteration, disclosure, or destruction of information we hold.</p>
-                    
-                    <h3>Security Measures Include:</h3>
-                    <ul>
-                        <li>Encryption of data in transit and at rest</li>
-                        <li>Regular security assessments and penetration testing</li>
-                        <li>Access controls to limit access to personal information</li>
-                        <li>Security training for our employees</li>
-                    </ul>
-                    
-                    <div class="highlight-box">
-                        <p><strong>Remember:</strong> While we strive to protect your information, no security system is impenetrable. We cannot guarantee the security of our databases.</p>
-                    </div>
-                </section>
+                    <section id="data-sharing" class="policy-section">
+                        <h2>Data Sharing and Disclosure</h2>
+                        <p>We do not share personal information with companies, organizations, or individuals outside of Meta except in the following cases:</p>
+                        
+                        <h3>With Your Consent</h3>
+                        <p>We will share personal information with third parties when we have your consent to do so.</p>
+                        
+                        <h3>For Legal Reasons</h3>
+                        <p>We will share personal information if we believe that access, use, preservation, or disclosure of the information is reasonably necessary to:</p>
+                        <ul>
+                            <li>Meet any applicable law, regulation, legal process, or enforceable governmental request</li>
+                            <li>Enforce applicable Terms of Service, including investigation of potential violations</li>
+                            <li>Detect, prevent, or otherwise address fraud, security, or technical issues</li>
+                            <li>Protect against harm to the rights, property or safety of our users, the public, or Meta</li>
+                        </ul>
+                    </section>
 
-                <section id="your-rights" class="policy-section">
-                    <h2>Your Rights and Choices</h2>
-                    <p>You have choices regarding the information we collect and how it's used.</p>
-                    
-                    <h3>Access and Correction</h3>
-                    <p>You can access and update most of your personal information through your account settings.</p>
-                    
-                    <h3>Deletion</h3>
-                    <p>You can request deletion of your personal information, subject to certain legal obligations we may have.</p>
-                    
-                    <h3>Communication Preferences</h3>
-                    <p>You can choose whether to receive promotional communications from us via email, SMS, or push notifications.</p>
-                    
-                    <h3>Location Information</h3>
-                    <p>You can control whether we collect location information through your device settings.</p>
-                </section>
+                    <section id="data-security" class="policy-section">
+                        <h2>Data Security</h2>
+                        <p>We work hard to protect our users from unauthorized access to or unauthorized alteration, disclosure, or destruction of information we hold.</p>
+                        
+                        <h3>Security Measures Include:</h3>
+                        <ul>
+                            <li>Encryption of data in transit and at rest</li>
+                            <li>Regular security assessments and penetration testing</li>
+                            <li>Access controls to limit access to personal information</li>
+                            <li>Security training for our employees</li>
+                        </ul>
+                        
+                        <div class="highlight-box">
+                            <p><strong>Remember:</strong> While we strive to protect your information, no security system is impenetrable. We cannot guarantee the security of our databases.</p>
+                        </div>
+                    </section>
 
-                <section id="cookies" class="policy-section">
-                    <h2>Cookies and Tracking</h2>
-                    <p>We use cookies and similar technologies to provide and improve our services.</p>
-                    
-                    <h3>Types of Cookies We Use</h3>
-                    <ul>
-                        <li><strong>Essential Cookies:</strong> Required for the app to function properly</li>
-                        <li><strong>Performance Cookies:</strong> Help us understand how users interact with our app</li>
-                        <li><strong>Functionality Cookies:</strong> Remember your preferences and settings</li>
-                        <li><strong>Advertising Cookies:</strong> Used to deliver relevant ads</li>
-                    </ul>
-                    
-                    <h3>Managing Cookies</h3>
-                    <p>Most browsers allow you to control cookies through their settings preferences. However, limiting cookies may impact your experience with our services.</p>
-                </section>
+                    <section id="your-rights" class="policy-section">
+                        <h2>Your Rights and Choices</h2>
+                        <p>You have choices regarding the information we collect and how it's used.</p>
+                        
+                        <h3>Access and Correction</h3>
+                        <p>You can access and update most of your personal information through your account settings.</p>
+                        
+                        <h3>Deletion</h3>
+                        <p>You can request deletion of your personal information, subject to certain legal obligations we may have.</p>
+                        
+                        <h3>Communication Preferences</h3>
+                        <p>You can choose whether to receive promotional communications from us via email, SMS, or push notifications.</p>
+                        
+                        <h3>Location Information</h3>
+                        <p>You can control whether we collect location information through your device settings.</p>
+                    </section>
 
-                <section id="international" class="policy-section">
-                    <h2>International Data Transfers</h2>
-                    <p>We may transfer your information outside of your country of residence for the purposes described in this policy.</p>
-                    
-                    <p>When we transfer information internationally, we implement safeguards to ensure your data receives an adequate level of protection.</p>
-                    
-                    <p>For transfers from the European Economic Area (EEA) to countries not deemed adequate by the European Commission, we've put in place appropriate measures to protect your personal data.</p>
-                </section>
+                    <section id="cookies" class="policy-section">
+                        <h2>Cookies and Tracking</h2>
+                        <p>We use cookies and similar technologies to provide and improve our services.</p>
+                        
+                        <h3>Types of Cookies We Use</h3>
+                        <ul>
+                            <li><strong>Essential Cookies:</strong> Required for the app to function properly</li>
+                            <li><strong>Performance Cookies:</strong> Help us understand how users interact with our app</li>
+                            <li><strong>Functionality Cookies:</strong> Remember your preferences and settings</li>
+                            <li><strong>Advertising Cookies:</strong> Used to deliver relevant ads</li>
+                        </ul>
+                        
+                        <h3>Managing Cookies</h3>
+                        <p>Most browsers allow you to control cookies through their settings preferences. However, limiting cookies may impact your experience with our services.</p>
+                    </section>
 
-                <section id="children" class="policy-section">
-                    <h2>Children's Privacy</h2>
-                    <p>Our services are not directed to individuals under the age of 16. We do not knowingly collect personal information from children under 16.</p>
-                    
-                    <p>If we become aware that a child under 16 has provided us with personal information, we will take steps to delete such information.</p>
-                    
-                    <p>If you believe a child under 16 may have provided us with personal information, please contact us.</p>
-                </section>
+                    <section id="international" class="policy-section">
+                        <h2>International Data Transfers</h2>
+                        <p>We may transfer your information outside of your country of residence for the purposes described in this policy.</p>
+                        
+                        <p>When we transfer information internationally, we implement safeguards to ensure your data receives an adequate level of protection.</p>
+                        
+                        <p>For transfers from the European Economic Area (EEA) to countries not deemed adequate by the European Commission, we've put in place appropriate measures to protect your personal data.</p>
+                    </section>
 
-                <section id="changes" class="policy-section">
-                    <h2>Changes to This Policy</h2>
-                    <p>We may change this privacy policy from time to time. We will post any changes on this page and, if the changes are significant, we will provide a more prominent notice.</p>
-                    
-                    <p>We will also keep prior versions of this privacy policy in an archive for your review.</p>
-                    
-                    <p>We encourage you to review our privacy policy whenever you use our services to stay informed about our information practices and the ways you can help protect your privacy.</p>
-                </section>
+                    <section id="children" class="policy-section">
+                        <h2>Children's Privacy</h2>
+                        <p>Our services are not directed to individuals under the age of 16. We do not knowingly collect personal information from children under 16.</p>
+                        
+                        <p>If we become aware that a child under 16 has provided us with personal information, we will take steps to delete such information.</p>
+                        
+                        <p>If you believe a child under 16 may have provided us with personal information, please contact us.</p>
+                    </section>
 
-                <section id="contact" class="policy-section">
-                    <h2>Contact Us</h2>
-                    <p>If you have questions about this privacy policy or our practices, please contact us:</p>
-                    
-                    <div class="contact-info">
-                        <h3>Meta Dev App Privacy Team</h3>
-                        <p>Email: privacy@metadevapp.com</p>
-                        <p>Address: 1 Hacker Way, Menlo Park, CA 94025</p>
-                        <p>Phone: +1 (650) 543-4800</p>
-                    </div>
-                    
-                    <p>We respond to all requests within 30 days.</p>
-                </section>
+                    <section id="policy-changes" class="policy-section">
+                        <h2>Changes to This Policy</h2>
+                        <p>We may change this privacy policy from time to time. We will post any changes on this page and, if the changes are significant, we will provide a more prominent notice.</p>
+                        
+                        <p>We will also keep prior versions of this privacy policy in an archive for your review.</p>
+                        
+                        <p>We encourage you to review our privacy policy whenever you use our services to stay informed about our information practices and the ways you can help protect your privacy.</p>
+                    </section>
+
+                    <section id="contact" class="policy-section">
+                        <h2>Contact Us</h2>
+                        <p>If you have questions about this privacy policy or our practices, please contact us:</p>
+                        
+                        <div class="contact-info">
+                            <h3>Meta Dev App Privacy Team</h3>
+                            <p><i class="fas fa-envelope"></i> Email: privacy@metadevapp.com</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Address: 1 Hacker Way, Menlo Park, CA 94025</p>
+                            <p><i class="fas fa-phone"></i> Phone: +1 (650) 543-4800</p>
+                        </div>
+                        
+                        <p>We respond to all requests within 30 days.</p>
+                    </section>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -557,7 +766,7 @@
                     <h3>Legal</h3>
                     <ul class="footer-links">
                         <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#" class="active">Privacy Policy</a></li>
                         <li><a href="#">Cookie Policy</a></li>
                         <li><a href="#">Data Processing</a></li>
                     </ul>
@@ -569,26 +778,44 @@
         </div>
     </footer>
 
-    <a href="#" class="back-to-top" id="back-to-top">↑</a>
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
         });
 
         // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
+        const backToTopBtn = document.getElementById('backToTop');
         
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
+                backToTopBtn.classList.add('visible');
             } else {
-                backToTopButton.classList.remove('visible');
+                backToTopBtn.classList.remove('visible');
             }
         });
-
-        backToTopButton.addEventListener('click', function(e) {
+        
+        backToTopBtn.addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -603,27 +830,50 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    // Update active state in policy navigation
+                    document.querySelectorAll('.policy-nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('nav ul').classList.remove('active');
                 }
             });
         });
 
         // Print functionality
-        document.getElementById('print-btn').addEventListener('click', function() {
+        document.getElementById('printBtn').addEventListener('click', () => {
             window.print();
         });
 
-        // Update last updated date dynamically (for demo purposes)
-        const lastUpdatedElement = document.getElementById('last-updated-date');
+        // Update last updated date dynamically
+        const lastUpdatedElement = document.getElementById('lastUpdatedDate');
         const currentDate = new Date();
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         lastUpdatedElement.textContent = currentDate.toLocaleDateString('en-US', options);
+
+        // Update active section in policy navigation on scroll
+        window.addEventListener('scroll', () => {
+            const policySections = document.querySelectorAll('.policy-section');
+            let currentSection = '';
+            
+            policySections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.policy-nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
